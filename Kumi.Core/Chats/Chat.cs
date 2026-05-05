@@ -8,7 +8,7 @@ using Kumi.LLM.Interfaces;
 
 namespace Kumi.Core.Chats;
 
-public class Chat(IToolQueryActions toolQueryActions)
+public class Chat(IToolQueryActions toolQueryActions, ILanguageModel languageModel)
 {
     private MessageHistory messageHistory;
 
@@ -16,7 +16,7 @@ public class Chat(IToolQueryActions toolQueryActions)
     {
         string tools = JsonSerializer.Serialize(await toolQueryActions.ListAllTools());
         this.messageHistory = new MessageHistory(tools);
-        Agent agent = new Agent(toolQueryActions, messageHistory);
+        Agent agent = new Agent(toolQueryActions, languageModel, messageHistory);
         Message response = await agent.Prompt(message);
         return response.Content;
     }

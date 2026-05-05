@@ -18,12 +18,11 @@ public class Agent
     private ILanguageModel _llm;
     private IToolQueryActions _toolQueryActions;
 
-    public Agent(IToolQueryActions toolQueryActions, MessageHistory messageHistory) 
+    public Agent(IToolQueryActions toolQueryActions, ILanguageModel languageModel, MessageHistory messageHistory) 
     {
         this._messageHistory = messageHistory;
-        
         this._toolQueryActions = toolQueryActions;
-        this._llm = new Ollama("gemma4:26b");
+        this._llm = languageModel;
     }
 
     public async Task<Message> Prompt(string message)
