@@ -1,4 +1,5 @@
 ﻿using Kumi.Domain.Tools;
+using Kumi.Domain.Configs;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
@@ -8,6 +9,7 @@ public class KumiDbContext : DbContext
 {
 
     public DbSet<Tool> Tools { get; set; }
+    public DbSet<Config> Configs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -31,6 +33,13 @@ public class KumiDbContext : DbContext
         
         modelBuilder.Entity<Tool>()
             .Property(x => x.Method)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Config>()
+            .HasKey(x => x.For);
+
+        modelBuilder.Entity<Config>()
+            .Property(x => x.Type)
             .HasConversion<string>();
 
         base.OnModelCreating(modelBuilder);

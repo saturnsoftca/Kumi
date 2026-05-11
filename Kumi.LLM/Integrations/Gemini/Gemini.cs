@@ -46,6 +46,9 @@ public class Gemini : ILanguageModel
       
         HttpResponseMessage response = await httpClient.PostAsync(_geminiUri, jsonContent);
         var jsonResponse = await response.Content.ReadAsStringAsync();
+        
+        Console.WriteLine(jsonResponse);
+
         var geminiResponse = JsonSerializer.Deserialize<GeminiResponse>(jsonResponse, options);
 
         return geminiMessageMapper.FromResponseToMessage(geminiResponse);
