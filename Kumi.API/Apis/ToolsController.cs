@@ -1,9 +1,9 @@
 using System;
-using Kumi.API.Application.Services;
-using Kumi.API.Application.Dtos;
+using Kumi.API.Application.Tools;
+using Kumi.API.Application.Tools.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kumi.API.Controllers 
+namespace Kumi.API.Apis 
 {
     public class ToolsController(ToolService toolService) : BaseApiController
     {

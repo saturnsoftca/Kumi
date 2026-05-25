@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kumi.API.Controllers
+namespace Kumi.API.Apis
 {
     [Route("api/v1/[controller]")]
     [ApiController]

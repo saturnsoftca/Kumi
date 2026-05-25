@@ -1,4 +1,4 @@
-namespace Kumi.API.Application.Dtos;
+namespace Kumi.API.Application.Configs.Dtos;
 
 public class ConfigDto
 {

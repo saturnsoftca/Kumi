@@ -1,7 +1,7 @@
-using Kumi.API.Application.Dtos;
+using Kumi.API.Application.Chats.Dtos;
 using Kumi.Core.Chats;
 
-namespace Kumi.API.Application.Services
+namespace Kumi.API.Application.Chats
 {
     public class ChatService(Chat chat)
     {

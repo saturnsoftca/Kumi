@@ -1,9 +1,9 @@
+using Kumi.API.Application.Chats;
+using Kumi.API.Application.Chats.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Kumi.API.Application.Dtos;
-using Kumi.API.Application.Services;
 
-namespace Kumi.API.Controllers
+namespace Kumi.API.Apis
 {
     public class ChatController(ChatService chatService) : BaseApiController
     {

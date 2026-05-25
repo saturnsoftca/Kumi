@@ -1,8 +1,8 @@
 using System;
-using Kumi.API.Application.Dtos;
+using Kumi.API.Application.Tools.Dtos;
 using Kumi.Domain.Tools;
 
-namespace Kumi.API.Application.Mappings;
+namespace Kumi.API.Application.Tools.Mappings;
 
 public class ParameterMapper
 {

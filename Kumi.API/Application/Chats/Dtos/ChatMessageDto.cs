@@ -1,4 +1,4 @@
-namespace Kumi.API.Application.Dtos;
+namespace Kumi.API.Application.Chats.Dtos;
 
 public class ChatMessageDto
 {

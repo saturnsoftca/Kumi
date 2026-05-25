@@ -1,6 +1,6 @@
 using System;
 
-namespace Kumi.API.Application.Dtos;
+namespace Kumi.API.Application.Tools.Dtos;
 
 public class ToolDto
 {

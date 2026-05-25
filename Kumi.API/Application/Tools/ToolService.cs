@@ -1,10 +1,10 @@
 using System;
-using Kumi.API.Application.Mappings;
-using Kumi.API.Application.Dtos;
 using Kumi.Domain.Tools;
 using Kumi.Core.Tools.Interfaces;
+using Kumi.API.Application.Tools.Mappings;
+using Kumi.API.Application.Tools.Dtos;
 
-namespace Kumi.API.Application.Services
+namespace Kumi.API.Application.Tools
 {
     
     public class ToolService(IToolCommandActions toolCommandActions,
