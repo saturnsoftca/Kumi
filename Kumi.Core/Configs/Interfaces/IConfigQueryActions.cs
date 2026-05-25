@@ -4,5 +4,5 @@ namespace Kumi.Core.Configs.Interfaces;
 
 public interface IConfigQueryActions
 {
-    public Task<Config?> FindToolFor(string user);
+    public Task<Config?> FindConfigFor(string user);
 }

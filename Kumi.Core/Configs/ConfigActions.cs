@@ -6,7 +6,7 @@ namespace Kumi.Core.Configs;
 
 public class ConfigActions(IConfigRepository repository) : IConfigQueryActions, IConfigCommandActions
 {
-    public async Task<Config?> FindToolFor(string user)
+    public async Task<Config?> FindConfigFor(string user)
     {
         return await repository.FindFor(user); 
     }

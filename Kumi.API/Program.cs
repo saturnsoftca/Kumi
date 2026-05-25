@@ -1,4 +1,6 @@
 using Kumi.API.Application.Chats;
+using Kumi.API.Application.Configs;
+using Kumi.API.Application.Configs.Mappings;
 using Kumi.API.Application.Tools;
 using Kumi.API.Application.Tools.Mappings;
 using Kumi.Core;
@@ -16,8 +18,11 @@ builder.Services.AddKumiRuntime();
 
 builder.Services.AddScoped<ParameterMapper>();
 builder.Services.AddScoped<ToolMapper>();
+builder.Services.AddScoped<ConfigMapper>();
+
 builder.Services.AddScoped<ToolService>();
 builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<ConfigService>();
 
 var app = builder.Build();
 

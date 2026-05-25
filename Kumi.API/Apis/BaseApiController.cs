@@ -12,6 +12,10 @@ namespace Kumi.API.Apis
             if (result.IsSuccess && result.Value != null)
             {
                 return Ok(result.Value);
+            }
+            else if (!result.IsSuccess && result.Code == 404)
+            {
+                return NotFound();
             } 
             return BadRequest();
         }
