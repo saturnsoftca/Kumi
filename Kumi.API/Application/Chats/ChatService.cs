@@ -9,14 +9,20 @@ namespace Kumi.API.Application.Chats
         {
             List<ChatMessageDto> messages = new();
             messages.Add(prompt);
-            
-            messages.Add(new ChatMessageDto
-            {
-                Type = "RESPONSE",
-                Content = await chat.PromptAgent(prompt.Content)
-            });
+            try
+            {                
+                messages.Add(new ChatMessageDto
+                {
+                    Type = "RESPONSE",
+                    Content = await chat.PromptAgent(prompt.Content)
+                });
 
-            return Result<List<ChatMessageDto>>.Success(messages);
+                return Result<List<ChatMessageDto>>.Success(messages);
+            } catch(LanguageModelNotConfiguredException ex)
+            {
+                return Result<List<ChatMessageDto>>.Failure(404);
+            } 
+
         }
     }
 }

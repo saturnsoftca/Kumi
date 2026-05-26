@@ -12,8 +12,6 @@ export default function SettingsModal({ closeModal }: Props) {
   const { data: config } = useConfig('SYSTEM');
   const { register } = useForm<Config>();
 
-  console.log(config);
-
   return (
     <Modal
       title="Settings"
@@ -25,14 +23,14 @@ export default function SettingsModal({ closeModal }: Props) {
         register={register}
         field="for"
         placeholder="Ollama"
-        value={config.type}
+        value={config?.type}
       />
       <Input
         label="Model"
         register={register}
         field="model"
         placeholder="gemma4:26b"
-        value={config.model}
+        value={config?.model}
       />
       <Input label="Api Key" register={register} field="apiKey" />
     </Modal>

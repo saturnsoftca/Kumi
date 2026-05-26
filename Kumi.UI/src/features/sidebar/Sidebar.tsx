@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SidebarItem from './SidebarItem';
-import SettingsModal from './SettingsModal';
+import SettingsModal from '../settings/SettingsModal';
 
 export default function Sidebar() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
