@@ -6,19 +6,44 @@ using Kumi.Core.Agents;
 using Kumi.Domain.Messages;
 using Kumi.LLM.Interfaces;
 using Kumi.LLM.Integrations.Ollama;
+using Kumi.Core.Configs.Interfaces;
+using Kumi.Domain.Configs;
+using System.Diagnostics;
+using Kumi.LLM.Integrations.Gemini;
 
 namespace Kumi.Core.Chats;
 
-public class Chat(IToolQueryActions toolQueryActions)
+public class Chat(IToolQueryActions toolQueryActions,
+                  IConfigQueryActions configQueryActions)
 {
     private MessageHistory messageHistory;
 
     public async Task<string> PromptAgent(string message)
     {
+        ILanguageModel languageModel = await InitializeLanguageModel();
         string tools = JsonSerializer.Serialize(await toolQueryActions.ListAllTools());
         this.messageHistory = new MessageHistory(tools);
-        Agent agent = new Agent(toolQueryActions, new Ollama("gemma4:26b"), messageHistory);
+        Agent agent = new Agent(toolQueryActions, languageModel, messageHistory);
         Message response = await agent.Prompt(message);
         return response.Content;
     }
+
+    private async Task<ILanguageModel> InitializeLanguageModel()
+    {
+        Config? config = await configQueryActions.FindConfigFor("SYSTEM");
+
+        switch(config!.Type)
+        {
+            case LanguageModelProviderType.Ollama:
+                return new Ollama(config.Model);
+            case LanguageModelProviderType.Gemini:
+                return new Gemini(config.Model, config.ApiKey!);
+            default:
+                break;
+        }
+
+        throw new Exception();
+
+    } 
+
 }
