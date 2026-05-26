@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
 import Modal from '../../components/Modal';
-import { useConfig } from '../../hooks/useConfigActions';
+import { useConfig, useUpdateConfig } from '../../hooks/useConfigActions';
 import type { Config } from '../../lib/types/Config';
 
 interface Props {
@@ -9,19 +9,27 @@ interface Props {
 }
 
 export default function SettingsModal({ closeModal }: Props) {
+  const updateConfig = useUpdateConfig();
   const { data: config } = useConfig('SYSTEM');
-  const { register } = useForm<Config>();
+  const { register, handleSubmit } = useForm<Config>();
+
+  async function onSubmit(config: Config) {
+    config.for = 'SYSTEM';
+    await updateConfig.mutateAsync(config, {
+      onSuccess: () => closeModal(),
+    });
+  }
 
   return (
     <Modal
       title="Settings"
-      onSubmit={() => console.log('Done')}
+      onSubmit={handleSubmit(onSubmit)}
       onCancel={closeModal}
     >
       <Input
         label="Provider"
         register={register}
-        field="for"
+        field="type"
         placeholder="Ollama"
         value={config?.type}
       />
