@@ -25,7 +25,7 @@ namespace Kumi.API.Application.Configs
             
             if (config != null)
             {
-                config = await configCommandActions.UpdateConfig(configMapper.ToEntity(configDto));
+                config = await configCommandActions.UpdateConfig(configMapper.ToExistingEntity(config, configDto));
                 return Result<ConfigDto>.Success(configMapper.ToDto(config));
             }
         

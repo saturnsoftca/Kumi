@@ -5,6 +5,7 @@ import { useSendPrompt } from '../../hooks/useChatActions';
 import type { ChatMessage } from '../../lib/types/ChatMessage';
 import { useConfig } from '../../hooks/useConfigActions';
 import SettingsModal from '../settings/SettingsModal';
+import type { AxiosError } from 'axios';
 
 export default function Chat() {
   const sendPrompt = useSendPrompt();
@@ -21,7 +22,13 @@ export default function Chat() {
       onSuccess: (chatMessages) => {
         setMessages([...messages, ...chatMessages]);
       },
-      onError: () => setIsSettingsOpen(true),
+      onError: (err: AxiosError) => {
+        if (err.code === 'ERR_BAD_REQUEST') {
+          console.log('here');
+        } else {
+          setIsSettingsOpen(true);
+        }
+      },
     });
 
     //setMessages([...messages, msg])

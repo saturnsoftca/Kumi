@@ -14,7 +14,6 @@ export default function SettingsModal({ closeModal }: Props) {
   const { register, handleSubmit } = useForm<Config>();
 
   async function onSubmit(config: Config) {
-    config.for = 'SYSTEM';
     await updateConfig.mutateAsync(config, {
       onSuccess: () => closeModal(),
     });
@@ -31,14 +30,14 @@ export default function SettingsModal({ closeModal }: Props) {
         register={register}
         field="type"
         placeholder="Ollama"
-        value={config?.type}
+        defaultValue={config?.type}
       />
       <Input
         label="Model"
         register={register}
         field="model"
         placeholder="gemma4:26b"
-        value={config?.model}
+        defaultValue={config?.model}
       />
       <Input label="Api Key" register={register} field="apiKey" />
     </Modal>

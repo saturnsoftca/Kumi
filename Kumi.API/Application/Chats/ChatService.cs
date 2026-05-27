@@ -18,9 +18,13 @@ namespace Kumi.API.Application.Chats
                 });
 
                 return Result<List<ChatMessageDto>>.Success(messages);
-            } catch(LanguageModelNotConfiguredException ex)
+            } catch(Exception ex)
             {
-                return Result<List<ChatMessageDto>>.Failure(404);
+                if (ex is LanguageModelNotConfiguredException || ex is LanguageModelConfigurationErrorException)
+                { 
+                    return Result<List<ChatMessageDto>>.Failure(404);
+                }
+                return Result<List<ChatMessageDto>>.Failure(500);
             } 
 
         }
